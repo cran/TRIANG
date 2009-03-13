@@ -6,9 +6,9 @@
 dtrg(c, a, h, y)
 }
 \arguments{
-  \item{c}{ The center $c$ is a non-negative integer }
+  \item{c}{ The center $c$ is an integer }
+  \item{a}{ The arm $a$ is a non-negative integer }
   \item{h}{ The order $h$ is a positive real number }
-  \item{a}{ The arm $a$ is non-negative integer }
   \item{y}{ The vector of observations}
 }
 \details{
@@ -63,42 +63,86 @@ legend(8,0.7,c("h=1/12", "h=1/2","h=1",  "h=2", "h=12"),pch=c(17,17,20,1,1),
 lty=c(1,2,1,2,1),cex = 1.2)
 par(op)
 ## The function is defined as
-function(c,a,h,y){  K=rep(0,length(y));                 
-  u=0;
-if (h==Inf)
-{
+function(c,a,h,y){  T=rep(0,length(y));
+ 
  if (a==0)
-  {K=rep(1,length(y))
-  }
- else 
-  {K=rep(1/(2*a+1),length(y))
-  }
-}
-else
-{   
- if (a==0)
-  { u=0
-  }
- else
-  {for (k in 1:a)
-   {u=u+k^h
+ {
+    {for (j in 1:length(y))             # Loop in j for each observation y
+    
+      {if (y[j]==c)   
+        T[j]= 1  # Dirac distribution at c 
+         
+       else{
+           T[j]=0
+	    }
+      } 
     }
-  } 
- A=(2*a+1)*(a+1)^h-2*u            # Normalizing constant 
+  }
+  
+
+else
+{ 
+if (h==0)
+ {
+    {for (j in 1:length(y))             # Loop in j for each observation y
+    
+      {if (y[j]==c)  
+        T[j]= 1  # Dirac distribution at c 
+         
+       else{
+           T[j]=0
+	    }
+      } 
+    }
+  }
+
+
+else if (h==Inf)
+ {
+    {for (j in 1:length(y))             # Loop in j for each observation y
+    
+      {if (y[j]>=(c-a) & y[j]<=(c+a))   #  Support {c-a,...,c,...c+a}
+        T[j]= 1/(2*a+1)  # Discrete uniform distribution  
+         
+       else{
+           T[j]=0
+	    }
+      } 
+    }
+  }
+ 
+ 
+ else
+{ u=0
+   
+ {for (k in 1:a)
+ 
+   { 
+    u=u+k^h
+    }
+    
+   } 
+ 
+  A=(2*a+1)*(a+1)^h-2*u                # Normalizing constant 
   
  {for (j in 1:length(y))             # Loop in j for each observation y
-    {
-     if (y[j]>=(c-a) & y[j]<=(c+a)) # Support {c-a,...,c...,c+a}
-        {K[j]= ((a+1)^h - (abs(y[j]-c))^h)/A  # Discrete triangular distribution
-         }
-     else{
-          K[j]=0
-	  } 
-     }
-     
-   } 
- }
-  return(K)
+    
+      {if (y[j]>=(c-a) & y[j]<=(c+a))   #  Support {c-a,...,c,...c+a}
+        T[j]= ((a+1)^h - (abs(y[j]-c))^h)/A  # Discrete triangular distribution 
+         
+        
+      
+        else{
+           T[j]=0
+	    }
+      } 
+    }
+ }  
+
+}
+
+
+ return(T) 
 }
 }
 \keyword{distribution}
