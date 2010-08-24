@@ -1,12 +1,11 @@
-`dtrg` <-  function(c,a,h,y){ 
-
- T=rep(0,length(y));
+`dtrg` <-
+function(c,a,h,y){T=rep(0,length(y));
  
  if (a==0)
  {
     {for (j in 1:length(y))             # Loop in j for each observation y
     
-      {if (y[j]==c)  
+      {if (y[j]==c)   #  Support {c-a,...,c,...c+a}
         T[j]= 1  # Dirac distribution at c 
          
        else{
@@ -23,7 +22,7 @@ if (h==0)
  {
     {for (j in 1:length(y))             # Loop in j for each observation y
     
-      {if (y[j]==c)  
+      {if (y[j]==c)  #  Support {c-a,...,c,...c+a}
         T[j]= 1  # Dirac distribution at c 
          
        else{
@@ -38,8 +37,8 @@ else if (h==Inf)
  {
     {for (j in 1:length(y))             # Loop in j for each observation y
     
-      {if (y[j]>=(c-a) & y[j]<=(c+a))   #  Support {c-a,...,c,...c+a}
-        T[j]= 1/(2*a+1)  # Dirac uniform distribution 
+      {if (y[j]>=(c-a) & y[j]<=(c+a)& y[j]==as.integer(y[j]))   #  Support {c-a,...,c,...c+a}
+        T[j]= 1/(2*a+1)  # Dirac distribution at c 
          
        else{
            T[j]=0
@@ -64,7 +63,7 @@ else if (h==Inf)
   
  {for (j in 1:length(y))             # Loop in j for each observation y
     
-      {if (y[j]>=(c-a) & y[j]<=(c+a))   #  Support {c-a,...,c,...c+a}
+      {if (y[j]>=(c-a) & y[j]<=(c+a) & y[j]==as.integer(y[j]))   #  Support {c-a,...,c,...c+a}
         T[j]= ((a+1)^h - (abs(y[j]-c))^h)/A  # Discrete triangular distribution 
          
         
@@ -78,6 +77,6 @@ else if (h==Inf)
 
 }
 
- return(T)
-}
+
+ return(T) }
 

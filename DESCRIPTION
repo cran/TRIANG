@@ -1,15 +1,15 @@
 Package: TRIANG
 Type: Package
-Title: Discrete triangular distributions
-Version: 1.1
-Date: 2009-03-13
+Title: Symmetric discrete triangular distributions
+Version: 1.2
+Date: 2010-08-24
 Author: Tristan Senga Kiess\'{e}, Silvio S. Zocchi, C\'{e}lestin C.
         Kokonendji
-Maintainer: Tristan Senga Kiess\'{e} <tristan.sengakiesse@univ-pau.fr>
-Description: This is a package for discrete triangular distributions
-        which complete the classical discrete distributions like
-        binomial, Poisson and Negative binomial.
+Maintainer: Tristan Senga Kiess\'{e} <tristan.senga-kiesse@lcpc.fr>
+Description: This is a package for symmetric discrete triangular
+        distributions
 License: GPL-2
-Packaged: Fri Mar 13 13:47:05 2009; root
+LazyLoad: yes
+Packaged: 2012-10-29 08:57:44 UTC; ripley
 Repository: CRAN
-Date/Publication: 2009-03-14 08:41:00
+Date/Publication: 2012-10-29 08:57:44
